@@ -1,0 +1,42 @@
+<mvc:View controllerName="hcm.employees.controller.App"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+
+    <Shell id= "shell">  <!-- Contenedor principal -->
+        <App id="app">   <!-- Permite navegar entre vistas -->
+            <pages>
+                <Page id="page" title="{i18n>title}">
+                    <content>
+                        <!-- <Label id="label1" text="{i18n>text1}" />
+                        <Input id="input1" value="Prueba" /> -->
+
+                        <Panel  id="panel1"
+                                headerText="{i18n>helloPanel}"
+                                expandable="true"
+                                expanded="true">
+                            <content>
+                                <Button id="Button1"
+                                        text="{i18n>text1}"
+                                        press="onShowHello"
+                                        icon="sap-icon://add-employee"
+                                        type="Reject"/>
+                                <Input  class="sapUiSmallMarginBegin"
+                                        id="input1"
+                                        width="60%"
+                                        value="{view>/employee/name}"
+                                        description="Hello {view>/employee/name}"
+                                        valueLiveUpdate="true"/>
+                                <Text   id="text1"
+                                        text="prueba texto sin i18n para clase CSS personalizada"
+                                        class="boldElements"/>
+                            </content>
+                        </Panel>
+
+                        
+                    </content>
+                </Page>
+            </pages>        
+        </App>
+    </Shell>
+
+</mvc:View>

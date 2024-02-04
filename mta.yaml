@@ -1,0 +1,81 @@
+_schema-version: "3.2"
+ID: TrabajoFinal
+version: 0.0.1
+modules:
+- name: trabajofinal-approuter
+  type: approuter.nodejs
+  path: trabajofinal-approuter
+  requires:
+  - name: TrabajoFinal_html_repo_runtime
+  - name: uaa_TrabajoFinal
+  - name: TrabajoFinal-destination-service
+    group: destinations
+    properties:
+      forwardAuthToken: false
+      name: ui5
+      url: https://ui5.sap.com
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: TrabajoFinal_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: TrabajoFinal_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - hcmemployees.zip
+      name: hcmemployees
+      target-path: resources/
+- name: hcmemployees
+  type: html5
+  path: employees
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: TrabajoFinal_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: uaa_TrabajoFinal
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: TrabajoFinal-xsuaa-service
+    service-plan: application
+- name: TrabajoFinal_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: TrabajoFinal-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: TrabajoFinal-destination-service
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo
