@@ -25,10 +25,5 @@ sap.ui.define([
                 this.getView().setModel(oModel, "view") // Nombre con el que queda registrado el modelo "view"
             },
 
-            onShowHello: function (){
-                MessageToast.show("Hello",{
-                    width: '10rem'
-                });
-            }
         });
     });
