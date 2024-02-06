@@ -5,9 +5,10 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "hcm/employees/model/models"
+        "hcm/employees/model/models",
+        "./controller/dialog" //Archivo centralizado para fragmento de diálogo
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, Device, models, dialog) {
         "use strict";
 
         return UIComponent.extend("hcm.employees.Component", {
@@ -29,7 +30,20 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+
+                this._oDialog = new dialog(this.getRootControl());
+            },
+
+            //Limpiar objetos basura y caché en navegador
+            exit: function () {
+                this._oDialog.destroy();
+                delete this._oDialog;
+            },
+
+            openDialog: function () {
+                this._oDialog.open();
             }
+
         });
     }
 );

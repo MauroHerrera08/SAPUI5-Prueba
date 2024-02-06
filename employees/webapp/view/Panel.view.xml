@@ -1,5 +1,6 @@
 <mvc:View controllerName="hcm.employees.controller.Panel"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:core="sap.ui.core"
     xmlns="sap.m">
 
     <Panel  id="panel1"
@@ -7,6 +8,11 @@
             expandable="true"
             expanded="true">
         <content>
+                <Button id="Button2"
+                        text="{i18n>text2}"
+                        press="onOpenDialog"
+                        class="sapUiSmallMarginEnd">
+                </Button>
             <Button id="Button1"
                     text="{i18n>text1}"
                     press="onShowHello"
@@ -23,5 +29,9 @@
                     class="boldElements"/>
         </content>
     </Panel>
+
+    <core:Fragment      id="fragmentForm"
+                        fragmentName="hcm.employees.fragment.form01"
+                        type="XML"/>
 
 </mvc:View>
