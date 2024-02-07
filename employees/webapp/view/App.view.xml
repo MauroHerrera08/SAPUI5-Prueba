@@ -14,6 +14,10 @@
                                         viewName="hcm.employees.view.Panel"
                                         type="XML"/>
 
+                        <mvc:XMLView    id="invoicesList"
+                                        viewName="hcm.employees.view.invoicesList"
+                                        type="XML"/>
+
                         
                     </content>
                 </Page>

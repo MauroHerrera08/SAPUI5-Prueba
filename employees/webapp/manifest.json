@@ -57,6 +57,10 @@
         "settings": {
           "bundleName": "hcm.employees.i18n.i18n"
         }
+      },
+      "invoices":{
+        "type":"sap.ui.model.json.JSONModel",
+        "uri":"model/invoices.json"
       }
     },
     "resources": {

@@ -1,0 +1,33 @@
+<mvc:View controllerName="hcm.employees.controller.invoicesList"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+
+    <List   id="invoicesList"
+            items="{invoices>/invoices}"
+            headerText="Lista"
+            width="auto"
+            class="sapUiResponsiveMargin">
+    
+        <items>
+            <ObjectListItem id="products"
+                            title="{invoices>Quantity} X {invoices>ProductName}"
+                            number="{
+                                parts:[
+                                {
+                                    path:'invoices>ExtendedPrice'
+                                },
+                                {
+                                    path:'currency>/usd'
+                                }
+                                ],
+                                type:'sap.ui.model.type.Currency',
+                                formatOptions:{
+                                    showMeasure: false
+                                }
+                            }"
+                            numberUnit="{currency>/usd}"/>
+        </items>
+    
+    </List>
+
+</mvc:View>
